@@ -1,0 +1,53 @@
+.content-doc {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-semibold font-poppins mb-10 text-primary-900 -mt-24 pt-24;
+  }
+
+  h1 {
+    @apply text-4xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-2xl;
+  }
+
+  h4 {
+    @apply text-xl;
+  }
+
+  h5 {
+    @apply text-lg;
+  }
+
+  p {
+    @apply text-slate-700 mb-6;
+  }
+
+  hr {
+    @apply my-8;
+  }
+
+  ul {
+    list-style: none; /* Remove default bullets */
+
+    li {
+      @apply text-slate-700 mb-2 ml-2;
+
+      &::before {
+        @apply text-primary-500 w-6 text-xl -ml-2; /* Add text color */
+        content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+        font-weight: bold; /* If you want it to be bold */
+        display: inline-block; /* Needed to add space between the bullet and the text */
+      }
+    }
+  }
+}
