@@ -1,23 +1,18 @@
 
 <script lang="ts" setup>
-const sampleData = ref([
-  {
-    text: "Introduction",
-    href: '/introduction',
-    icon: 'mdi:information-outline'
-  },
-  {
-    text: "Installation",
-    href: '/introduction/installation',
-    icon: 'icon-park-outline:install'
-  }
-])
+import { SidebarMenuItem } from '~/types/sidebar-menu-item';
+
+type Props = {
+  data: SidebarMenuItem[]
+}
+const props = defineProps<Props>()
+
 </script>
 
 <template>
   <div>
     <div
-      v-for="data in sampleData"
+      v-for="data in props.data"
       :key="data.href"
     >
       <RouterLink
