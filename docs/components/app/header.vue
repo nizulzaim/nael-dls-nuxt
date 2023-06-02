@@ -34,22 +34,10 @@ watch(() => y.value, (val) => {
           Introduction
         </RouterLink>
         <RouterLink
-          to="/components"
+          to="/documentations"
           class="menu-item"
         >
-          Components
-        </RouterLink>
-        <RouterLink
-          to="/patterns"
-          class="menu-item"
-        >
-          Patterns
-        </RouterLink>
-        <RouterLink
-          to="/templates"
-          class="menu-item"
-        >
-          Templates
+          Documentations
         </RouterLink>
       </div>
     </div>

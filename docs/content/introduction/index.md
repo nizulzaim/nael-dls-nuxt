@@ -29,7 +29,7 @@ NDLS is building blocks for creating digital services. It is a collection of ope
     <card class="mb-4">
       <div class="ml-2">
         <div class="flex">
-          <Icon name="uim:box" class="mr-6 w-8 h-8 text-primary"></Icon>
+          <Icon name="iconamoon:box-duotone" class="mr-6 w-8 h-8 text-primary"></Icon>
           <h3>Components</h3>
         </div>
         <div class="text-slate-600">

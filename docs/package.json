@@ -5,6 +5,7 @@
     "dev": "nuxi dev"
   },
   "dependencies": {
+    "@fireflysemantics/join": "^1.0.14",
     "gsap": "^3.11.5",
     "vue": "^3.3.4"
   },
