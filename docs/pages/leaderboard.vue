@@ -3,6 +3,19 @@ definePageMeta({
   layout: 'blank',
 })
 
+const windowEl = ref<HTMLElement | null | Window>(null)
+const { y } = useScroll(windowEl)
+const isBackgroundFill = ref(false)
+watch(() => y.value, (val) => {
+  isBackgroundFill.value = val > 1
+})
+
+onMounted(() => {
+  nextTick(() => {
+    windowEl.value = window
+  })
+})
+
 const items = ref([
   {
     name: 'DE - Software Engineering & Testing',
@@ -32,8 +45,14 @@ const items = ref([
     >
       <PetronasDotBg />
     </div>
-    <div class="bg-primary sticky top-0 z-50 mb-10">
-      <div class="max-w-7xl mx-auto flex gap-6 items-center py-10 group">
+    <div
+      class="sticky top-0 z-50 mb-10 transition-all"
+      :class="[isBackgroundFill ? 'bg-primary-600 shadow-lg shadow-slate-400/10' : 'bg-transparent']"
+    >
+      <div
+        class="max-w-7xl mx-auto flex gap-6 items-center py-10 group transition-all duration-300 ease origin-left"
+        :class="[isBackgroundFill ? 'scale-50 py-2': 'scale-100']"
+      >
         <div class="w-20">
           <svg
             id="Layer_2"
@@ -88,6 +107,9 @@ const items = ref([
                   </div>
                 </div>
                 <div>
+                  <div class="font-medium text-sm mb-2 uppercase text-gray-500">
+                    Digital Engineering
+                  </div>
                   <div class=" font-light text-lg mb-2">
                     {{ item.name }}
                   </div>
@@ -130,7 +152,7 @@ const items = ref([
                 <td>10</td>
                 <td>10</td>
                 <td>2</td>
-                <td class="font-semibold">
+                <td class="font-bold text-transparent bg-clip-text bg-gradient-to-tr from-primary-500 via-primary-600 to-purple-700">
                   30
                 </td>
               </tr>
@@ -160,7 +182,7 @@ table {
     tr {
       @apply border-t border-gray-100;
       td {
-        @apply py-3 text-center;
+        @apply py-3 text-center text-base;
         &.__left {
           @apply text-left;
         }
