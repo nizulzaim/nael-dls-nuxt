@@ -7,7 +7,7 @@ const windowEl = ref<HTMLElement | null | Window>(null)
 const { y } = useScroll(windowEl)
 const isBackgroundFill = ref(false)
 watch(() => y.value, (val) => {
-  isBackgroundFill.value = val > 1
+  isBackgroundFill.value = val > 0
 })
 
 onMounted(() => {
@@ -21,18 +21,21 @@ const items = ref([
     name: 'DE - Software Engineering & Testing',
     points: 30,
     class: "hover:bg-yellow-500 hover:text-white",
+    divisionClass: "group-hover:text-white",
     iconClass: "text-yellow-500 group-hover:text-white",
   },
   {
     name: 'DE - Product Managements',
     points: 10,
     class: "hover:bg-gray-300",
+    divisionClass: "group-hover:text-slate-500",
     iconClass: "text-gray-400 group-hover:text-black",
   },
   {
     name: 'Enterprise Architecture',
     points: 5,
     class: "hover:bg-amber-600 hover:text-white",
+    divisionClass: "group-hover:text-white",
     iconClass: "text-amber-600 group-hover:text-white",
   },
 ])
@@ -107,7 +110,10 @@ const items = ref([
                   </div>
                 </div>
                 <div>
-                  <div class="font-medium text-sm mb-2 uppercase text-gray-500">
+                  <div
+                    class="font-medium text-sm mb-2 uppercase text-gray-500"
+                    :class="item.divisionClass"
+                  >
                     Digital Engineering
                   </div>
                   <div class=" font-light text-lg mb-2">
@@ -121,43 +127,48 @@ const items = ref([
             </div>  
           </div>
         </div>
-        <div class="bg-white rounded-lg shadow-lg overflow-hidden mb-10">
-          <table class="w-full">
-            <thead>
-              <tr>
-                <th>Rank</th>
-                <th class="__left">
-                  Department
-                </th>
-                <th>Ideation</th>
-                <th>Ideation</th>
-                <th>Ideation</th>
-                <th>Ideation</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="key, index in 20"
-                :key="index"
-              >
-                <td>#{{ index + 1 }}</td>
-                <td class="__left">
-                  <div class="text-sm uppercase font-medium text-transparent bg-clip-text bg-gradient-to-r from-slate-500 via-slate-500 to-slate-400">
-                    Digital Engineering
-                  </div>
-                  <div>Software Engineering & Testing</div>
-                </td>
-                <td>8</td>
-                <td>10</td>
-                <td>10</td>
-                <td>2</td>
-                <td class="font-bold text-transparent bg-clip-text bg-gradient-to-tr from-primary-500 via-primary-600 to-purple-700">
-                  30
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="-mx-4 px-4">
+          <div class="rounded-lg shadow-lg mb-10">
+            <table class="w-full">
+              <thead>
+                <tr>
+                  <th>Rank</th>
+                  <th class="__left">
+                    Department
+                  </th>
+                  <th>Ideation</th>
+                  <th>Ideation</th>
+                  <th>Ideation</th>
+                  <th>Ideation</th>
+                  <th>Total</th>
+                </tr>
+              </thead>
+              <tbody class="bg-white">
+                <tr
+                  v-for="key, index in 20"
+                  :key="index"
+                  class="group"
+                >
+                  <td>
+                    #{{ index + 1 }}
+                  </td>
+                  <td class="__left">
+                    <div class="text-sm uppercase font-medium text-transparent bg-clip-text bg-gradient-to-r from-slate-500 via-slate-500 to-slate-400">
+                      Digital Engineering
+                    </div>
+                    <div>Software Engineering & Testing</div>
+                  </td>
+                  <td>8</td>
+                  <td>10</td>
+                  <td>10</td>
+                  <td>2</td>
+                  <td class="font-bold text-transparent bg-clip-text bg-gradient-to-tr from-primary-500 via-primary-600 to-purple-700">
+                    30
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>
@@ -166,23 +177,32 @@ const items = ref([
 
 <style scoped lang="scss">
 table {
+  @apply px-4;
   @apply text-lg font-light;
   thead {
-    @apply bg-gray-100;
     tr {
       th {
+        @apply bg-gray-100;
         @apply py-3 text-center text-base text-gray-500;
         &.__left {
           @apply text-left;
+        }
+
+        &:first-child {
+          @apply rounded-tl-lg;
+        }
+
+        &:last-child {
+          @apply rounded-tr-lg;
         }
       }
     }
   }
   tbody {
     tr {
-      @apply border-t border-gray-100;
+      @apply border-t border-gray-100 shadow-gray-500/10 hover:shadow-lg transition-shadow relative hover:z-50 hover:px-4 hover:bg-white duration-500;
       td {
-        @apply py-3 text-center text-base;
+        @apply py-3 text-center text-base transition-all;
         &.__left {
           @apply text-left;
         }
